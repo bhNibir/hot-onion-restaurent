@@ -1,0 +1,15 @@
+.roundButton{
+    background-color: #f91944;
+    color: white;
+    border-radius: 30px;
+    padding: 7px 20px;
+    
+    text-align: center;
+}
+
+a{
+    text-align: center;
+    margin-left: 20px;
+    color: black !important;
+    font-weight: 600;
+}
