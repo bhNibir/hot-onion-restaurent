@@ -1,0 +1,14 @@
+.tabs-menu{
+    margin: 50px 0px;
+}
+
+.tabs-menu a{
+    color: black;
+}
+.tabs-menu a:hover{
+    color:  #f91944;
+}
+.active{
+    border-bottom: 2px solid  #f91944;
+    color:  #f91944 !important;
+  }

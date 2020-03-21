@@ -7,10 +7,10 @@
     text-align: center;
 }
 
-a{
+.nav-link a{
     text-align: center;
-    margin-left: 20px;
     color: black !important;
+    margin-left: 20px;
     font-weight: 600;
 }
 
@@ -18,7 +18,7 @@ a{
 
     width: 100%;
     text-align: center;
-    background-image: url("../images/bannerbackground.png");
+    background-image: url("../../images/bannerbackground.png");
     background-repeat: no-repeat;
     background-size: cover;
     padding: 155px 0px;
