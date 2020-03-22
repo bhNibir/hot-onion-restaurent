@@ -1,14 +1,15 @@
 import React from 'react';
 import './App.css';
 import Header from './components/Header/Header';
-import FoodItems from './components/FoodItems/FoodItems';
+import TabMenu from './components/TabMenu/TabMenu';
+
 
 
 function App() {
   return (
     <div className="App">
      <Header></Header>
-     <FoodItems></FoodItems>
+     <TabMenu></TabMenu>
     </div>
   );
 }
