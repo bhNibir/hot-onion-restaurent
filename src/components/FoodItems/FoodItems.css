@@ -13,3 +13,9 @@
     border-radius:10px;
     cursor: pointer;
 }
+
+.btn-order{
+    color: #fff !important;
+    background-color: #f91944 !important;
+    border-color: #f91944 !important;
+}

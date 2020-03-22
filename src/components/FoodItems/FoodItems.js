@@ -31,9 +31,14 @@ const FoodItems = (props) => {
                 <Row>
                 {
                     items.map(item => <Item item={item} display={display} onClickdetailHandel={onClickdetailHandel}></Item>)
-                } 
+                       
+                }               
                 <Details detailItem={detailItem} display={display} onClickHide={onClickHide}></Details>                                     
                 </Row>
+                <div className="text-center" style={{display: display.itemView}}>
+                    <button className="btn-order btn px-5 m-5" disabled>Place Your Order</button>
+                </div>
+        
             </Container>
         </div>
     );
