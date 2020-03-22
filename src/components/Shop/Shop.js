@@ -1,13 +1,21 @@
-import React from 'react';
-import TabMenu from '../TabMenu/TabMenu';
+import React, { useState } from 'react';
+import './Shop.css'
 import fakeData from '../../fakeData'
+import FoodItems from '../FoodItems/FoodItems';
 
 const Shop = () => {
-    console.log(fakeData);
+    const [items, setItems] = useState(fakeData)
     
     return (
         <div>
-            <TabMenu></TabMenu>
+            <div className="item-menu text-center">
+                <button>Breakfast</button>
+                <button>Lunch</button>
+                <button>Dinner</button>
+            </div>
+
+            <FoodItems items={items}></FoodItems>
+            
         </div>
     );
 };

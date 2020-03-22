@@ -1,16 +1,19 @@
 import React from 'react';
-import './FoodItems.css'
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Col, Row, Image } from 'react-bootstrap';
 
-
-const FoodItems = () => {
+const FoodItems = (props) => {
+    const items = props.items
     return (
         <div>
             <Container>
-                <Row className="food-items">
-                    <Col>1 of 3</Col>
-                    <Col>2 of 3</Col>
-                    <Col>3 of 3</Col>
+                <Row>
+                {
+                    items.map(item => <Col md={4}>
+                        {
+                            <Image src={item.image} rounded />        
+                        }
+                    </Col>)
+                }                                        
                 </Row>
             </Container>
         </div>
