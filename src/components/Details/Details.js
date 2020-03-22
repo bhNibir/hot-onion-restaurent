@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Col, Image, Row } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart, faMinus, faPlus, faTimesCircle, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faShoppingCart, faMinus, faPlus, faTimes } from '@fortawesome/free-solid-svg-icons';
 import './Details.css'
 
 const Details = (props) => {
@@ -9,14 +9,14 @@ const Details = (props) => {
     const onClickHide = props.onClickHide
     const {name, price, image, details } = props.detailItem
     const [itemCount, setItemCount] = useState(1)
+    const handelCart = props.handelCart
 
     const handelItemCount = (value) =>{
 
-         value < 0 && itemCount < 1 ? alert("Your Cart is Empty") : setItemCount(itemCount+value);
-         
-         
+         value < 0 && itemCount < 1 ? alert("Your Cart is Empty") : setItemCount(itemCount+value); 
          
     }
+
 
     return (
         <div style={{display: detailView, textAlign:"center"}}>
@@ -35,7 +35,9 @@ const Details = (props) => {
                             <button onClick={()=> handelItemCount(1)}><FontAwesomeIcon icon={faPlus} /></button>
                         </span>
                     </div>
-                    <button className="round-button mt-3"> <FontAwesomeIcon icon={faShoppingCart} />  Add</button>
+                    <button className="round-button mt-3"
+                        onClick={()=> handelCart({key:props.detailItem.key, quantity: itemCount})}
+                    > <FontAwesomeIcon icon={faShoppingCart} />  Add</button>
                 </div>  
             </Col>  
             <Col className="text-center" md={6}>

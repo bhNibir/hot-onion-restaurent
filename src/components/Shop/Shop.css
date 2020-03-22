@@ -10,9 +10,9 @@
     font-size: 20px;
   }
   
-  
+
 .active, .item-btn:hover {
     color: #f91944;
-    border-bottom: 2px solid #f91944;
+    border-bottom: 3px solid #f91944;
 }
 
