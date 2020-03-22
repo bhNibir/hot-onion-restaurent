@@ -23,10 +23,6 @@ const Shop = () => {
         onItemMenuClick("lunch")
     },[])
 
-    console.log(color);
-    
-
-    
 
     return (
         <div>
