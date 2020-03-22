@@ -8,7 +8,7 @@ const Item = (props) => {
 
     return ( 
         
-            <Col style={{display: itemView}} onClick={onClickHide} className="text-center" md={4}>
+            <Col style={{display: itemView}} onClick={() => onClickHide("item")} className="text-center" md={4}>
                 {
                     <div className="my-5 item">
                         <Image className="item-img" src={image} rounded />

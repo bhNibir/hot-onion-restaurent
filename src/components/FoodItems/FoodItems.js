@@ -9,8 +9,12 @@ const FoodItems = (props) => {
     const [display,setDisplay] = useState({itemView:"block", detailView:"none"})
     const items = props.items
 
-    const onClickHide = () => {
-        console.log(1);
+    const onClickHide = (value) => {
+        value === "item" ? setDisplay({itemView:"none", detailView:"block"}) :
+        setDisplay({itemView:"block", detailView:"none"})
+
+        
+        
         
     }
     return (
@@ -20,7 +24,7 @@ const FoodItems = (props) => {
                 {
                     items.map(item => <Item item={item} display={display} onClickHide={onClickHide}></Item>)
                 } 
-                <Details display={display}></Details>                                     
+                <Details display={display} onClickHide={onClickHide}></Details>                                     
                 </Row>
             </Container>
         </div>
