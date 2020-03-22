@@ -14,7 +14,12 @@ const FoodItems = (props) => {
                 {
                     items.map(item => <Col className="text-center" md={4}>
                         {
-                            <Image className="item-img" src={item.image} rounded />        
+                            <div className="my-5 item">
+                                <Image className="item-img" src={item.image} rounded />
+                                <h6 className="mt-3">{item.name}</h6>
+                                <p>{item.shortDescription}</p>
+                                <h5>$ {item.price}</h5>
+                            </div>        
                         }
                     </Col>)
                 }                                        

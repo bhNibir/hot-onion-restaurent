@@ -2,3 +2,13 @@
     height: 200px;
     width: 200px;
 }
+
+.item {
+    transition: box-shadow .3s;
+    padding: 20px;    
+  }
+
+.item:hover {
+    box-shadow: 0 0 11px rgba(33,33,33,.2); 
+    border-radius:10px;
+}
