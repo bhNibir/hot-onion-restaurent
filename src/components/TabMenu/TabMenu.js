@@ -1,6 +1,6 @@
 import React from 'react';
 import './TabMenu.css'
-import { Tabs, Tab, Nav } from 'react-bootstrap';
+import { Tab, Nav } from 'react-bootstrap';
 import FoodItems from '../FoodItems/FoodItems';
 
 const TabMenu = () => {

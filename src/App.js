@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Header from './components/Header/Header';
-import TabMenu from './components/TabMenu/TabMenu';
+import Shop from './components/Shop/Shop';
 
 
 
@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="App">
      <Header></Header>
-     <TabMenu></TabMenu>
+     <Shop></Shop>
     </div>
   );
 }
