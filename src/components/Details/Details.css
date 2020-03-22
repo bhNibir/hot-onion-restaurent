@@ -1,0 +1,41 @@
+.detail-container{
+
+}
+
+.detail-container button, .close-btn{
+    border: none;
+}
+.cart-count{
+    border-radius: 40px;
+    border: 1px solid lightgray;
+    margin-left: 30px;
+    padding: 7px 20px
+}
+.cart-count button{
+    border: none;
+    background-color: white;
+    color: gray;
+}
+
+.cart-count> button:hover{
+    color:  #f91944;
+}
+
+.cart-count input{
+    width: 20px;
+    border: none;
+    color: black;
+    background-color: white;
+    margin: 0px 10px;
+    font-size: 20px;
+}
+
+.close-btn{
+    margin-bottom: 60px;
+    margin-top: 30px;
+}
+
+.close-btn:hover{
+    transition: box-shadow .3s;
+    box-shadow: 0 0 11px rgba(33,33,33,.5);
+}
