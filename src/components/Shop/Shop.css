@@ -1,16 +1,18 @@
-.item-menu{
-    
-}
-.item-menu button{
+
+.item-btn {
+    border: none;
+    outline: none;
+    padding: 10px 16px;
     margin: 50px 20px;
-    border:none;
     background-color: white;
+    cursor: pointer;
     font-weight: 600;
     font-size: 20px;
-
-    
-}
-.active-btn-dinner , .active-btn-lunch, .active-btn-breakfast{
+  }
+  
+  
+.active, .item-btn:hover {
     color: #f91944;
-    
+    border-bottom: 2px solid #f91944;
 }
+

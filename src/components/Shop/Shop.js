@@ -4,16 +4,13 @@ import fakeData from '../../fakeData'
 import FoodItems from '../FoodItems/FoodItems';
 
 const Shop = () => {
-    const [foodItems, setFoodItems] = useState(fakeData)
-    
-   
+    const [foodItems, setFoodItems] = useState(fakeData) 
     const [items, setItems] = useState([])
-    const [color, setColor] = useState("")
+    const [btnInfo, setBtnInfo] = useState()
+    
 
     const onItemMenuClick = (value) => {
-
-        setItems(foodItems.filter(item => item.category === value));
-        setColor("active-btn-"+value)
+        setItems(foodItems.filter(item => item.category === value));        
     }
     useEffect(()=>{
         setFoodItems(fakeData)
@@ -23,13 +20,15 @@ const Shop = () => {
         onItemMenuClick("lunch")
     },[])
 
+ 
+
 
     return (
         <div>
             <div className="item-menu text-center mt-5">
-                <button className={color} onClick={() => onItemMenuClick("breakfast")}>Breakfast</button>
-                <button className={color} onClick={() => onItemMenuClick("lunch")}>Lunch</button>
-                <button className={color} onClick={() => onItemMenuClick("dinner")}>Dinner</button>
+                <button  className="item-btn " onClick={() => onItemMenuClick("breakfast")}>Breakfast</button>
+                <button  className="item-btn active" onClick={() => onItemMenuClick("lunch")}>Lunch</button>
+                <button  className="item-btn" onClick={() => onItemMenuClick("dinner")}>Dinner</button>
             </div>
             
             <FoodItems items={items}></FoodItems>
