@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './Shop.css'
 import fakeData from '../../fakeData'
 import FoodItems from '../FoodItems/FoodItems';
 
 const Shop = () => {
     const [foodItems, setFoodItems] = useState(fakeData) 
-    const [items, setItems] = useState([])
-    
-    
+    const [items, setItems] = useState([])    
 
     const onItemMenuClick = (value) => {
         setItems(foodItems.filter(item => item.category === value));        
@@ -16,7 +14,7 @@ const Shop = () => {
         setFoodItems(fakeData)
     },[items])
 
-    useEffect(()=>{
+    useEffect(() => {
         onItemMenuClick("lunch")
     },[])
 

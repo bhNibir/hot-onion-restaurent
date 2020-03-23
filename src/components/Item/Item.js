@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Image, Row } from 'react-bootstrap';
+import { Col, Image } from 'react-bootstrap';
 
 const Item = (props) => {
     const { key, name, image, shortDescription, price } = props.item

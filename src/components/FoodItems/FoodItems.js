@@ -1,16 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { Container, Col, Row, Image } from 'react-bootstrap';
+import React, { useState, useEffect, createContext } from 'react';
+import { Container, Row } from 'react-bootstrap';
 import './FoodItems.css'
 import Item from '../Item/Item'
 import Details from '../Details/Details';
-import {addToDatabaseCart} from '../../utilities/databaseManager'
+import {addToDatabaseCart, getDatabaseCart} from '../../utilities/databaseManager'
+import Header from '../Header/Header';
 
+export const TotalQuantityContext = createContext()
 
 const FoodItems = (props) => {
     const [display,setDisplay] = useState({itemView:"block", detailView:"none"})
     const items = props.items
     const [detailItem, setDetailItem] = useState({})
     const [cartItems, setCartItems] = useState([])
+    const [totalItems, setTotalItems] = useState(0)
+    
     
 
     const onClickdetailHandel = (value, key) => {
@@ -41,30 +45,42 @@ const FoodItems = (props) => {
             newCart = [...cartItems, item];
         }
         setCartItems(newCart)
+        alert(`Successfully add to cart`)
     }
     useEffect(() => {
         cartItems.map(cartItem => addToDatabaseCart(cartItem.key, cartItem.quantity))
-        console.log(cartItems)
-    }, [handelCart])
+        const saveCart = getDatabaseCart()
+        const itemQuantity = Object.values(saveCart)
+        const totalQuantity = itemQuantity.reduce((a, b) => a + b, 0)
+        setTotalItems(totalQuantity);
+        
+        
+    }, [cartItems])
+
+    
     
     
     
     
     return (
         <div>
+            <TotalQuantityContext.Provider value={totalItems}>
+
             <Container>
                 <Row>
                 {
                     items.map(item => <Item item={item} key={item.key} display={display} onClickdetailHandel={onClickdetailHandel}></Item>)
-                       
+                    
                 }               
                 <Details detailItem={detailItem} display={display} onClickHide={onClickHide} handelCart={handelCart}></Details>                                     
                 </Row>
                 <div className="text-center" style={{display: display.itemView}}>
-                    <button className="btn-order btn px-5 m-5" disabled={cartItems.length ? false: true}>Place Your Order</button>
+                    <button className="btn-order btn px-5 m-5" disabled={totalItems ? false: true}>Place Your Order</button>
                 </div>
         
             </Container>
+
+            </TotalQuantityContext.Provider>
         </div>
     );
 };
