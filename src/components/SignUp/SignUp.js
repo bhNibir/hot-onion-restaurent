@@ -5,10 +5,7 @@ import * as firebase from "firebase/app";
 
 // Add the Firebase services that you want to use
 import "firebase/auth";
-import "firebase/firestore";
-import firebaseConfig from '../../firebase.config';
 
-firebase.initializeApp(firebaseConfig);
 
 const SignUp = () => {
     const [user, setUser] = useState({
@@ -43,27 +40,19 @@ const SignUp = () => {
         }
 
     const handelCreateUser = () => {
+        console.log(user);
+        
 
-        // firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
-        // .then(res => {
-        //     console.log(res)
-        //     console.log("Scceucces")
-            
-        // })
-        // .catch((error) =>{
-        //     console.log(error);           
-
-        // })
-
-        const provider = new firebase.auth.GoogleAuthProvider()
-
-        firebase.auth().signInWithPopup(provider)
-        .then(res => {
+        firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
+        .then(res=>{
+            res.user.updateProfile({
+                displayName: user.name
+            })
             console.log(res);
             
         })
-        .catch(error => {
-            console.log(error);
+        .catch(err => {
+            console.log(err);
             
         })
         
@@ -73,13 +62,16 @@ const SignUp = () => {
             <div className="row justify-content-center">
                 <div className="col-lg-5 col-md-8 col-sm-8 text-center">
                 <img  className="w-50 my-5" src={logo} alt=""/>
-                    <form className="signup" onSubmit={handelCreateUser}>
+                    {/* <form className="signup" onSubmit={handelCreateUser}> */}
+                    {/* from diye data pathale problem kore keno pore dekhte hobe */}
+                    <div className="signup" onSubmit={handelCreateUser}>
                         <input className="w-100 p-3 mb-4" onBlur={handelUserInfo} placeholder="Name" type="text" name="name"  required />
                         <input className="w-100 p-3 mb-4" onBlur={handelUserInfo} placeholder="Email" type="email" name="email"  required />
                         <input className="w-100 p-3 mb-4" onBlur={handelUserInfo} placeholder="Password" type="password" name="password"  required />
                         <input className="w-100 p-3 mb-4" onChange={handelUserInfo} placeholder="Confirm Password" type="password" name="confirmPassword"  required />
-                        <input className="w-100 p-3 mb-4 btn btn-order"  type="submit"  value="Sign Up" disabled= {user.submitDisable} />
-                    </form>
+                        <input className="w-100 p-3 mb-4 btn btn-order" onClick={handelCreateUser}  type="submit"  value="Sign Up" disabled= {user.submitDisable} />
+                    </div>
+                    {/* </form> */}
                 </div>
             </div>
             
