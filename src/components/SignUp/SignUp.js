@@ -7,10 +7,9 @@ const SignUp = () => {
         name : '',
         email : '',
         password: '',
-        isSubmit: true,
+        confirmPassword: '',
+        submitDisable: true
     })
-
-   
 
         
     const handelUserInfo = (e) => {
@@ -23,20 +22,10 @@ const SignUp = () => {
         let validName= false
         let validEmail= false
 
-        let pass = null
-        let pass2 = null
-
+        
          //check pass
-        validPass = true
-        // check email
-        validEmail = true
-        // check name
-        validEmail = true
-
-        if(validPass && validName && validEmail){
-            user.isSubmit = false
-        }
-        console.log(user)
+         userInfo.submitDisable=false
+        
         userInfo[e.target.name] = e.target.value
         setUser(userInfo) 
         
@@ -57,7 +46,7 @@ const SignUp = () => {
                         <input className="w-100 p-3 mb-4" onBlur={handelUserInfo} placeholder="Email" type="email" name="email"  required />
                         <input className="w-100 p-3 mb-4" placeholder="Password" type="password" name="password"  required />
                         <input className="w-100 p-3 mb-4" onBlur={handelUserInfo} placeholder="Confirm Password" type="password" name="password2"  required />
-                        <input className="w-100 p-3 mb-4 btn btn-order"  type="submit"  value="Sign Up" disabled= {user.isSubmit} />
+                        <input className="w-100 p-3 mb-4 btn btn-order"  type="submit"  value="Sign Up" disabled= {user.submitDisable} />
                     </form>
                 </div>
             </div>
