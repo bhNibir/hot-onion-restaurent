@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import './Header.css'
-import { Navbar, Nav, Container, Row } from 'react-bootstrap';
+import { Navbar, Nav, Container} from 'react-bootstrap';
 import logo from '../../images/logo2.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
@@ -28,24 +28,14 @@ const Header = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ml-auto nav-link">
-                        <Nav.Link href="/cart"><FontAwesomeIcon icon={faShoppingCart} /><span className="badge badge-pill badge-danger">{totalCartItem}</span></Nav.Link>
-                        <Nav.Link href="/login">Login</Nav.Link>
+                        <Nav.Link href="/cart"><FontAwesomeIcon icon={faShoppingCart} /><span className="badge badge-pill badge-danger">{totalCartItem}</span></Nav.Link>                        
+                        <Nav.Link href="/login">Login</Nav.Link>                    
                         <Nav.Link href="/signup"><span className="round-button">Sign up</span></Nav.Link>
+                        
                     </Nav> 
                 </Navbar.Collapse>
             </Container>
             </Navbar>   
-            <Container fluid>
-                <Row>
-                <div className="search-container">
-                    <h1>Best food waiting for your belly</h1>
-                    <span>
-                        <input className="" type="text" placeholder="Search food items"/>
-                        <button className="round-button">Search</button>
-                    </span>
-                </div>
-                </Row>
-            </Container>
         </div>
     );
 };
