@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Col, Row, Image } from 'react-bootstrap';
 import './FoodItems.css'
 import Item from '../Item/Item'
 import Details from '../Details/Details';
+import {addToDatabaseCart} from '../../utilities/databaseManager'
 
 
 const FoodItems = (props) => {
@@ -26,9 +27,25 @@ const FoodItems = (props) => {
     }
 
     const handelCart= (item) =>{        
-        setCartItems([...cartItems, item])        
-        alert(`${item.name} successfully Add To Cart `)        
+        const toBeAddedKey = item.key
+        const sameItem = cartItems.find(cartItem => cartItem.key === toBeAddedKey)
+        let count = 1;
+        let newCart;
+        if(sameItem){
+            count = sameItem.quantity + item.quantity;
+            sameItem.quantity = count
+            const others = cartItems.filter(cartItem => cartItem.key !== toBeAddedKey  )
+            newCart = [...others, sameItem]
+        }  
+        else {
+            newCart = [...cartItems, item];
+        }
+        setCartItems(newCart)
     }
+    useEffect(() => {
+        cartItems.map(cartItem => addToDatabaseCart(cartItem.key, cartItem.quantity))
+        console.log(cartItems)
+    }, [handelCart])
     
     
     

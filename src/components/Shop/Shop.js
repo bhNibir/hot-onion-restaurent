@@ -6,7 +6,7 @@ import FoodItems from '../FoodItems/FoodItems';
 const Shop = () => {
     const [foodItems, setFoodItems] = useState(fakeData) 
     const [items, setItems] = useState([])
-    const [btnInfo, setBtnInfo] = useState()
+    
     
 
     const onItemMenuClick = (value) => {
