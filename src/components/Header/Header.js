@@ -5,6 +5,7 @@ import logo from '../../images/logo2.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 import { TotalQuantityContext } from '../FoodItems/FoodItems';
+import { Link } from 'react-router-dom';
 
 
 
@@ -15,22 +16,24 @@ const Header = () => {
     return (
         <div> 
 
-            <Navbar bg="white" variant="light" expand="lg">
+            <Navbar className="py-2" bg="white" variant="light" expand="lg">
             <Container>
-                <Navbar.Brand href="/home">
+                <Navbar.Brand>
+                <Link to="/">
                     <img
                         src={logo}
                         height="40"
                         className="d-inline-block align-top"
                         alt="Red Onion logo"
                     />
+                </Link>
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ml-auto nav-link">
-                        <Nav.Link href="/cart"><FontAwesomeIcon icon={faShoppingCart} /><span className="badge badge-pill badge-danger">{totalCartItem}</span></Nav.Link>                        
-                        <Nav.Link href="/login">Login</Nav.Link>                    
-                        <Nav.Link href="/signup"><span className="round-button">Sign up</span></Nav.Link>
+                        <Link to="/cart"><FontAwesomeIcon icon={faShoppingCart} /><span className="badge badge-pill badge-danger">{totalCartItem}</span></Link>                        
+                        <Link to="/login">Login</Link>                    
+                        <Link to="/signup"><span className="round-button">Sign up</span></Link>
                         
                     </Nav> 
                 </Navbar.Collapse>

@@ -11,3 +11,18 @@
     box-shadow: 0 0 3pt 2pt #f91944;
     border: none;
 }
+
+.signup-section{
+    background-image: url("../../images/signup-bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: white;
+    
+}
+
+.signup-section a{
+    color: #f91944;
+}
+.signup-section a:hover{
+    color: #f91944;
+}

@@ -5,10 +5,12 @@ import Item from '../Item/Item'
 import Details from '../Details/Details';
 import {addToDatabaseCart, getDatabaseCart} from '../../utilities/databaseManager'
 import Header from '../Header/Header';
+import { useAlert, positions } from 'react-alert';
 
 export const TotalQuantityContext = createContext()
 
 const FoodItems = (props) => {
+    const alert = useAlert()
     const [display,setDisplay] = useState({itemView:"block", detailView:"none"})
     const items = props.items
     const [detailItem, setDetailItem] = useState({})
@@ -45,7 +47,7 @@ const FoodItems = (props) => {
             newCart = [...cartItems, item];
         }
         setCartItems(newCart)
-        alert(`Successfully add to cart`)
+        alert.success(<div style={{ textTransform: "capitalize" }}>Successfully add to cart </div>)
     }
     useEffect(() => {
         cartItems.map(cartItem => addToDatabaseCart(cartItem.key, cartItem.quantity))

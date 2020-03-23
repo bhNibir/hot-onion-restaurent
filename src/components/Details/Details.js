@@ -3,8 +3,11 @@ import { Col, Image, Row } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faMinus, faPlus, faTimes } from '@fortawesome/free-solid-svg-icons';
 import './Details.css'
+import { useAlert } from 'react-alert';
+
 
 const Details = (props) => {
+    const alert = useAlert()
     const { detailView} = props.display
     const onClickHide = props.onClickHide
     const {name, price, image, details } = props.detailItem
@@ -13,7 +16,7 @@ const Details = (props) => {
 
     const handelItemCount = (value) =>{
 
-         value < 0 && itemCount < 1 ? alert("Your Cart is Empty") : setItemCount(itemCount+value); 
+         value < 0 && itemCount < 1 ? alert.error(<div style={{ textTransform: "capitalize" }}>Your cart is Empty </div> ) : setItemCount(itemCount+value); 
          
     }
 

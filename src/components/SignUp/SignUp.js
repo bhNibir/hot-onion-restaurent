@@ -5,9 +5,12 @@ import * as firebase from "firebase/app";
 
 // Add the Firebase services that you want to use
 import "firebase/auth";
+import { useAlert, positions, timeout } from 'react-alert';
+import { Link } from 'react-router-dom';
 
 
 const SignUp = () => {
+    const alert = useAlert();
     const [user, setUser] = useState({
         name : '',
         email : '',
@@ -28,12 +31,10 @@ const SignUp = () => {
          //check pass
         
            if(userInfo.password === '' || userInfo.password !== userInfo.confirmPassword){
-               console.log("Not Match");  
                userInfo.submitDisable = true
            }
            else{
                userInfo.submitDisable = false
-             console.log("Not Match")
            }
 
            setUser(userInfo)
@@ -48,19 +49,21 @@ const SignUp = () => {
             res.user.updateProfile({
                 displayName: user.name
             })
-            console.log(res);
+            alert.success(<div style={{ textTransform: "capitalize" }}>Successfully SignUp </div> )
             
         })
         .catch(err => {
+            const errorMessage = err.message
+            alert.error(<div style={{ textTransform: "capitalize" }}>{errorMessage}</div>)
             console.log(err);
             
         })
         
     }
     return (
-        <div className="container">
+        <div className="container-fluid signup-section">
             <div className="row justify-content-center">
-                <div className="col-lg-5 col-md-8 col-sm-8 text-center">
+                <div className="col-lg-4 col-md-8 col-sm-8 text-center">
                 <img  className="w-50 my-5" src={logo} alt=""/>
                     {/* <form className="signup" onSubmit={handelCreateUser}> */}
                     {/* from diye data pathale problem kore keno pore dekhte hobe */}
@@ -71,6 +74,7 @@ const SignUp = () => {
                         <input className="w-100 p-3 mb-4" onChange={handelUserInfo} placeholder="Confirm Password" type="password" name="confirmPassword"  required />
                         <input className="w-100 p-3 mb-4 btn btn-order" onClick={handelCreateUser}  type="submit"  value="Sign Up" disabled= {user.submitDisable} />
                     </div>
+                    <Link to="/login">Have an account?</Link>
                     {/* </form> */}
                 </div>
             </div>
