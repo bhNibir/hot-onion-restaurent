@@ -18,19 +18,20 @@ const SignUp = () => {
         }
         
         //validation check
-        let validPass= false
-        let validName= false
-        let validEmail= false
 
-        
-         //check pass
-         userInfo.submitDisable=false
-        
         userInfo[e.target.name] = e.target.value
-        setUser(userInfo) 
-        
-             
-    }
+         //check pass
+        setUser(userInfo)
+           if(userInfo.password === '' || userInfo.password !== userInfo.confirmPassword){
+               console.log("Not Match");  
+               userInfo.submitDisable = true
+           }
+           else{
+               userInfo.submitDisable = false
+             console.log("Not Match")
+           }
+           
+        }
 
     const userCreateHandel = (e) => {
         console.log(user.name , user.email , user.password);
@@ -44,8 +45,8 @@ const SignUp = () => {
                     <form className="signup" onSubmit={userCreateHandel}>
                         <input className="w-100 p-3 mb-4" onBlur={handelUserInfo} placeholder="Name" type="text" name="name"  required />
                         <input className="w-100 p-3 mb-4" onBlur={handelUserInfo} placeholder="Email" type="email" name="email"  required />
-                        <input className="w-100 p-3 mb-4" placeholder="Password" type="password" name="password"  required />
-                        <input className="w-100 p-3 mb-4" onBlur={handelUserInfo} placeholder="Confirm Password" type="password" name="password2"  required />
+                        <input className="w-100 p-3 mb-4" onBlur={handelUserInfo} placeholder="Password" type="password" name="password"  required />
+                        <input className="w-100 p-3 mb-4" onChange={handelUserInfo} placeholder="Confirm Password" type="password" name="confirmPassword"  required />
                         <input className="w-100 p-3 mb-4 btn btn-order"  type="submit"  value="Sign Up" disabled= {user.submitDisable} />
                     </form>
                 </div>
