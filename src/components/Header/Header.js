@@ -31,7 +31,7 @@ const Header = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ml-auto nav-link">
-                        <Link to="/cart"><FontAwesomeIcon icon={faShoppingCart} /><span className="badge badge-pill badge-danger">{totalCartItem}</span></Link>                        
+                        <Link to="/cart"><FontAwesomeIcon icon={faShoppingCart} /><span className="badge badge-pill badge-danger">{totalCartItem || 0}</span></Link>                        
                         <Link to="/login">Login</Link>                    
                         <Link to="/signup"><span className="round-button">Sign up</span></Link>
                         
