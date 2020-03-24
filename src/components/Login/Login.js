@@ -35,13 +35,11 @@ const Login = (props) => {
             const loginUser = {
                 ...user
              }
-
+                            
              loginUser.name = res.user.displayName
              loginUser.isSignIn = true
-
              updateUserInfo(loginUser)
-            
-            
+                         
         })
         .catch(err => {
             console.log(err);

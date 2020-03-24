@@ -1,4 +1,4 @@
-import React, { useState, createContext } from 'react';
+import React, { useState, createContext, useEffect } from 'react';
 import './App.css';
 import Header from './components/Header/Header';
 import Shop from './components/Shop/Shop';
@@ -14,6 +14,10 @@ import Slider from './components/Slider/Slider';
 
 import { positions, Provider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
+
+import * as firebase from "firebase/app";
+import "firebase/auth";
+
 
 const options = {
   timeout: 5000,
@@ -31,8 +35,28 @@ function App() {
     isSignIn: false
    })
   const updateUserInfo = (userInfo) => setUser(userInfo)
+
+  useEffect(()=>{
+
+    firebase.auth().onAuthStateChanged(usr => {
+      if (usr) {
+        const { displayName, email } = usr
+        const crrUser = {
+          ...user
+        }
+        crrUser.email = email
+        crrUser.name = displayName
+        crrUser.isSignIn = true
+
+        setUser(crrUser)
+    } else {
+      // No user is signed in.
+    }
+    })
+  },[])
   
   return (
+    
     <div className="App">
       
      <Router>
