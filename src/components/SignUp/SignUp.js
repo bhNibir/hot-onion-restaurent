@@ -5,7 +5,7 @@ import * as firebase from "firebase/app";
 
 // Add the Firebase services that you want to use
 import "firebase/auth";
-import { useAlert, positions, timeout } from 'react-alert';
+import { useAlert } from 'react-alert';
 import { Link } from 'react-router-dom';
 
 
@@ -49,12 +49,12 @@ const SignUp = () => {
             res.user.updateProfile({
                 displayName: user.name
             })
-            alert.success(<div style={{ textTransform: "capitalize" }}>Successfully SignUp </div> )
+            alert.success(<div style={{ textTransform: "none" }}>Successfully SignUp </div> )
             
         })
         .catch(err => {
             const errorMessage = err.message
-            alert.error(<div style={{ textTransform: "capitalize" }}>{errorMessage}</div>)
+            alert.error(<div style={{ textTransform: "none" }}>{errorMessage}</div>)
             console.log(err);
             
         })
@@ -67,7 +67,7 @@ const SignUp = () => {
                 <img  className="w-50 my-5" src={logo} alt=""/>
                     {/* <form className="signup" onSubmit={handelCreateUser}> */}
                     {/* from diye data pathale problem kore keno pore dekhte hobe */}
-                    <div className="signup" onSubmit={handelCreateUser}>
+                    <div className="signup">
                         <input className="w-100 p-3 mb-4" onBlur={handelUserInfo} placeholder="Name" type="text" name="name"  required />
                         <input className="w-100 p-3 mb-4" onBlur={handelUserInfo} placeholder="Email" type="email" name="email"  required />
                         <input className="w-100 p-3 mb-4" onBlur={handelUserInfo} placeholder="Password" type="password" name="password"  required />

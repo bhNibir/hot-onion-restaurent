@@ -16,7 +16,7 @@ const Details = (props) => {
 
     const handelItemCount = (value) =>{
 
-         value < 0 && itemCount < 1 ? alert.error(<div style={{ textTransform: "capitalize" }}>Your cart is Empty </div> ) : setItemCount(itemCount+value); 
+         value < 0 && itemCount < 1 ? alert.error(<div style={{ textTransform: "none" }}>Your cart is Empty </div> ) : setItemCount(itemCount+value); 
          
     }
 

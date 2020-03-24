@@ -4,8 +4,7 @@ import './FoodItems.css'
 import Item from '../Item/Item'
 import Details from '../Details/Details';
 import {addToDatabaseCart, getDatabaseCart} from '../../utilities/databaseManager'
-import Header from '../Header/Header';
-import { useAlert, positions } from 'react-alert';
+import { useAlert} from 'react-alert';
 
 export const TotalQuantityContext = createContext()
 
@@ -47,7 +46,7 @@ const FoodItems = (props) => {
             newCart = [...cartItems, item];
         }
         setCartItems(newCart)
-        alert.success(<div style={{ textTransform: "capitalize" }}>Successfully add to cart </div>)
+        alert.success(<div style={{ textTransform: "none" }}>Successfully add to cart </div>)
     }
     useEffect(() => {
         cartItems.map(cartItem => addToDatabaseCart(cartItem.key, cartItem.quantity))

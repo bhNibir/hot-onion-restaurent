@@ -7,6 +7,7 @@ import logo from '../../images/logo2.png'
 import "firebase/auth";
 import firebaseConfig from '../../firebase.config';
 import { Link } from 'react-router-dom';
+import { useAlert } from 'react-alert';
 
 firebase.initializeApp(firebaseConfig);
 
@@ -15,7 +16,8 @@ firebase.initializeApp(firebaseConfig);
 
 
 const Login = () => {
-    const [user, setUser] = useState({email: '', password: '', name: 'babu'})
+    const alert = useAlert()
+    const [user, setUser] = useState({email: '', password: ''})
     const handelChange = (e)=>{
         const newUser = {
            ...user
@@ -26,17 +28,17 @@ const Login = () => {
     }
 
     const handelLogin= () =>{
-        //const provider = new firebase.auth.GoogleAuthProvider();
-        firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
+        console.log(user.email, user.password);
+        
+        firebase.auth().signInWithEmailAndPassword(user.email, user.password)
         .then(res=>{
-            res.user.updateProfile({
-                displayName: user.name
-            })
+            
             console.log(res);
             
         })
         .catch(err => {
             console.log(err);
+            alert.error(<div style={{textTransform: "none"}}>{err.message}</div>)
             
         })
     }
@@ -46,10 +48,10 @@ const Login = () => {
         <div className="row justify-content-center">
             <div className="col-lg-4 col-md-8 col-sm-8 text-center">
             <img  className="w-50 my-5" src={logo} alt=""/>
-                <div className="signup" onSubmit={handelLogin}>
-                    <input className="w-100 p-3 mb-4"  placeholder="Email" type="email" name="email"  required />
-                    <input className="w-100 p-3 mb-4"  placeholder="Password" type="password" name="password"  required />
-                    <input className="w-100 p-3 mb-4 btn btn-order"  type="submit"  value="Login"/>
+                <div className="signup">
+                    <input className="w-100 p-3 mb-4" onBlur={handelChange} placeholder="Email" type="email" name="email"  required />
+                    <input className="w-100 p-3 mb-4" onBlur={handelChange} placeholder="Password" type="password" name="password"  required />
+                    <input className="w-100 p-3 mb-4 btn btn-order" onClick={handelLogin} type="submit"  value="Login"/>
                 </div>
                 <Link to="/signup">Create a new Account</Link>
             </div>
