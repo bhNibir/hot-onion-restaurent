@@ -28,32 +28,48 @@ export const AuthContext = createContext()
 
 
 function App() {
+
   const [user, setUser] = useState({
     email: '',
     password: '',
     name: '',
     isSignIn: false
    })
+
   const updateUserInfo = (userInfo) => setUser(userInfo)
 
   useEffect(()=>{
 
     firebase.auth().onAuthStateChanged(usr => {
-      if (usr) {
-        const { displayName, email } = usr
-        const crrUser = {
-          ...user
-        }
-        crrUser.email = email
-        crrUser.name = displayName
-        crrUser.isSignIn = true
+        if (usr) {
+          const { displayName, email } = usr
+          const crrUser = {
+            ...user
+          }
+          crrUser.email = email
+          crrUser.name = displayName
+          crrUser.isSignIn = true
 
-        setUser(crrUser)
-    } else {
-      // No user is signed in.
-    }
+          setUser(crrUser)
+      } else {
+        // No user is signed in.
+      }
     })
   },[])
+
+  const logOut = () => {
+    firebase.auth().signOut()
+    .then(res => {
+      // Sign-out successful.
+      console.log(res);
+      
+    })
+    .catch(error => {
+      // An error happened.
+      console.log(error);
+    })
+  }
+
   
   return (
     
@@ -62,7 +78,7 @@ function App() {
      <Router>
       <AuthContext.Provider value = {user}>
       <Provider template={AlertTemplate} {...options}>
-      <Header></Header>
+      <Header logOut={logOut}></Header>
         <Switch>
             <Route exact path="/">
               <Slider></Slider>
@@ -75,7 +91,7 @@ function App() {
             </Route> 
             <Route path='/signup'>
               <SignUp></SignUp>
-            </Route>  
+            </Route>
         </Switch>
         </Provider>
         </AuthContext.Provider>
