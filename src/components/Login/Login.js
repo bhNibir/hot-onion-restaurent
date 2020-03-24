@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Login.css'
 import * as firebase from "firebase/app";
 import logo from '../../images/logo2.png'
@@ -13,18 +13,18 @@ firebase.initializeApp(firebaseConfig);
 
 
 
-
-
-const Login = () => {
+const Login = (props) => {
+    const {updateUserInfo, user} = props
     const alert = useAlert()
-    const [user, setUser] = useState({email: '', password: ''})
+    
+
     const handelChange = (e)=>{
         const newUser = {
            ...user
         }
 
         newUser[e.target.name] = e.target.value
-        setUser(newUser) 
+        updateUserInfo(newUser) 
     }
 
     const handelLogin= () =>{
@@ -32,8 +32,15 @@ const Login = () => {
         
         firebase.auth().signInWithEmailAndPassword(user.email, user.password)
         .then(res=>{
+            const loginUser = {
+                ...user
+             }
+
+             loginUser.name = res.user.displayName
+             loginUser.isSignIn = true
+
+             updateUserInfo(loginUser)
             
-            console.log(res);
             
         })
         .catch(err => {
@@ -43,6 +50,7 @@ const Login = () => {
         })
     }
 
+    
     return (
         <div className="container-fluid signup-section">
         <div className="row justify-content-center">

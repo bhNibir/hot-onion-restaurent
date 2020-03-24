@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState, createContext } from 'react';
 import './App.css';
 import Header from './components/Header/Header';
 import Shop from './components/Shop/Shop';
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 } from "react-router-dom";
 import Login from './components/Login/Login';
 import SignUp from './components/SignUp/SignUp';
@@ -19,28 +20,41 @@ const options = {
   position: positions.TOP_CENTER
 };
 
+export const AuthContext = createContext()
 
 
 function App() {
+  const [user, setUser] = useState({
+    email: '',
+    password: '',
+    name: '',
+    isSignIn: false
+   })
+  const updateUserInfo = (userInfo) => setUser(userInfo)
+  
   return (
     <div className="App">
       
      <Router>
-     <Provider template={AlertTemplate} {...options}>
-     <Header></Header>
-       <Switch>
-          <Route exact path="/">
-            <Slider></Slider>
-            <Shop></Shop>
-          </Route>
-          <Route path="/login">
-            <Login></Login>
-          </Route> 
-          <Route path='/signup'>
-            <SignUp></SignUp>
-          </Route>  
-       </Switch>
-       </Provider>
+      <AuthContext.Provider value = {user}>
+      <Provider template={AlertTemplate} {...options}>
+      <Header></Header>
+        <Switch>
+            <Route exact path="/">
+              <Slider></Slider>
+              <Shop></Shop>
+            </Route>
+            <Route path="/login">
+              {
+                user.isSignIn ? <Redirect to = "/" /> : <Login updateUserInfo = {updateUserInfo}  user = {user}> </Login>
+              }
+            </Route> 
+            <Route path='/signup'>
+              <SignUp></SignUp>
+            </Route>  
+        </Switch>
+        </Provider>
+        </AuthContext.Provider>
      </Router>
 
     </div>
