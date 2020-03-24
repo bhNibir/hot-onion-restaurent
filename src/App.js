@@ -90,7 +90,9 @@ function App() {
               }
             </Route> 
             <Route path='/signup'>
-              <SignUp></SignUp>
+              {
+                 user.isSignIn ? <Redirect to = "/" /> :<SignUp></SignUp>
+              }
             </Route>
         </Switch>
         </Provider>

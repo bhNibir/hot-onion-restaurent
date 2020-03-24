@@ -41,7 +41,7 @@ const SignUp = () => {
         }
 
     const handelCreateUser = () => {
-        console.log(user);
+        
         
 
         firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
