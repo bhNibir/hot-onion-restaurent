@@ -39,7 +39,7 @@ const Header = (props) => {
                         {
                             user.name ? <p>Welcome <span style={{color: "#f91944"}}> {user.name}</span></p> : <React.Fragment/>
                         }
-                        <Link to="/cart"><FontAwesomeIcon icon={faShoppingCart} /><span className="badge badge-pill badge-danger">{totalCartItem || 0}</span></Link>                        
+                        <Link to="/review"><FontAwesomeIcon icon={faShoppingCart} /><span className="badge badge-pill badge-danger">{totalCartItem || 0}</span></Link>                        
                         { user.isSignIn ? 
                             <Nav.Link href="/" onClick={logOut}><span className="round-button">Log Out</span></Nav.Link> 
                             :

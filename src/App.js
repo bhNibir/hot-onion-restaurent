@@ -17,6 +17,7 @@ import AlertTemplate from "react-alert-template-basic";
 
 import * as firebase from "firebase/app";
 import "firebase/auth";
+import Review from './components/Review/Review';
 
 
 const options = {
@@ -93,6 +94,9 @@ function App() {
               {
                  user.isSignIn ? <Redirect to = "/" /> :<SignUp></SignUp>
               }
+            </Route>
+            <Route path = '/review' >
+              <Review></Review>
             </Route>
         </Switch>
         </Provider>
