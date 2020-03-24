@@ -5,11 +5,11 @@ import FoodItems from '../FoodItems/FoodItems';
 import { addToDatabaseCart, getDatabaseCart } from '../../utilities/databaseManager';
 import { useAlert} from 'react-alert';
 
-const Shop = () => {
+const Shop = (props) => {
+    const {totalCartItems, setTotalCartItems} = props
     const [foodItems, setFoodItems] = useState(fakeData) 
     const [items, setItems] = useState([])   
     const [cartItems, setCartItems] = useState([])
-    const [totalCartItems, totalTotalCartItems] = useState(0) 
     const alert = useAlert()
 
     const onItemMenuClick = (value) => {
@@ -43,17 +43,13 @@ const Shop = () => {
     useEffect(() => {
         cartItems.map(cartItem => addToDatabaseCart(cartItem.key, cartItem.quantity))
         const saveCart = getDatabaseCart()
-        const itemQuantity = Object.values(saveCart)
-        const totalQuantity = itemQuantity.reduce((a, b) => a + b, 0)
-        totalTotalCartItems(totalQuantity);
+        const items = Object.keys(saveCart)
+        const itemObject = Object.values(saveCart)
+        const totalQuantity = itemObject.reduce((a, b) => a + b, 0)
+        setTotalCartItems({items, totalQuantity});
         
         
     }, [cartItems])
-
-    
-
- 
-
 
     return (
         <div>
@@ -63,7 +59,7 @@ const Shop = () => {
                 <button  className="item-btn" onClick={() => onItemMenuClick("dinner")}>Dinner</button>
             </div>
             
-            <FoodItems items={items} handelCart={handelCart} totalCartItems={totalCartItems}></FoodItems>
+            <FoodItems items={items} handelCart={handelCart}></FoodItems>
             
         </div>
     );

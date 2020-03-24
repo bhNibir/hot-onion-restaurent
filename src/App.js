@@ -26,9 +26,11 @@ const options = {
 };
 
 export const AuthContext = createContext()
+export const CartContext = createContext()
 
 
 function App() {
+  const [totalCartItems, setTotalCartItems] = useState({})
 
   const [user, setUser] = useState({
     email: '',
@@ -78,12 +80,13 @@ function App() {
       
      <Router>
       <AuthContext.Provider value = {user}>
+      <CartContext.Provider value = {totalCartItems}>
       <Provider template={AlertTemplate} {...options}>
       <Header logOut={logOut}></Header>
         <Switch>
             <Route exact path="/">
               <Slider></Slider>
-              <Shop></Shop>
+              <Shop setTotalCartItems={setTotalCartItems} totalCartItems={totalCartItems}></Shop>
             </Route>
             <Route path="/login">
               {
@@ -100,6 +103,7 @@ function App() {
             </Route>
         </Switch>
         </Provider>
+        </CartContext.Provider>
         </AuthContext.Provider>
      </Router>
 

@@ -28,8 +28,7 @@ const Login = (props) => {
     }
 
     const handelLogin= () =>{
-        console.log(user.email, user.password);
-        
+                
         firebase.auth().signInWithEmailAndPassword(user.email, user.password)
         .then(res=>{
             const loginUser = {

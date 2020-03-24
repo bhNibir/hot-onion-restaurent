@@ -4,20 +4,16 @@ import { Navbar, Nav, Container} from 'react-bootstrap';
 import logo from '../../images/logo2.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons'
-import { TotalQuantityContext } from '../FoodItems/FoodItems';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../../App'
+import { AuthContext, CartContext } from '../../App'
 
 
 
 const Header = (props) => {
-    const totalCartItem = useContext(TotalQuantityContext)
     const user = useContext(AuthContext)
+    const cart = useContext(CartContext)
     const { logOut } =props
-    
-    console.log(user.isSignIn);
-    
-
+   
     return (
         <div> 
 
@@ -39,7 +35,7 @@ const Header = (props) => {
                         {
                             user.name ? <p>Welcome <span style={{color: "#f91944"}}> {user.name}</span></p> : <React.Fragment/>
                         }
-                        <Link to="/review"><FontAwesomeIcon icon={faShoppingCart} /><span className="badge badge-pill badge-danger">{totalCartItem || 0}</span></Link>                        
+                        <Link to="/review"><FontAwesomeIcon icon={faShoppingCart} /><span className="badge badge-pill badge-danger">{cart.totalQuantity || 0}</span></Link>                        
                         { user.isSignIn ? 
                             <Nav.Link href="/" onClick={logOut}><span className="round-button">Log Out</span></Nav.Link> 
                             :

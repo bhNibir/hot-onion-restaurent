@@ -1,15 +1,14 @@
-import React, { useState, createContext } from 'react';
+import React, { useState } from 'react';
 import { Container, Row } from 'react-bootstrap';
 import './FoodItems.css'
 import Item from '../Item/Item'
 import Details from '../Details/Details';
 
 
-export const TotalQuantityContext = createContext()
 
 const FoodItems = (props) => {
     const [display,setDisplay] = useState({itemView:"block", detailView:"none"})
-    const {items, handelCart, totalCartItems} = props
+    const {items, handelCart} = props
     const [detailItem, setDetailItem] = useState({})
     
     
@@ -34,9 +33,7 @@ const FoodItems = (props) => {
     
     
     return (
-        <div>
-            <TotalQuantityContext.Provider value={totalCartItems}>
-
+        <div>    
             <Container>
                 <Row>
                 {
@@ -46,12 +43,10 @@ const FoodItems = (props) => {
                 <Details detailItem={detailItem} display={display} onClickHide={onClickHide} handelCart={handelCart}></Details>                                     
                 </Row>
                 <div className="text-center" style={{display: display.itemView}}>
-                    <button className="btn-order btn px-5 m-5" disabled={totalCartItems ? false: true}>Place Your Order</button>
+                    <button className="btn-order btn px-5 m-5" disabled>Place Your Order</button>
                 </div>
         
             </Container>
-
-            </TotalQuantityContext.Provider>
         </div>
     );
 };
