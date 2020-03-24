@@ -13,8 +13,8 @@ const Review = () => {
                     <hr/>
                     <br/>
                         <div className="signup">
-                            <input className="w-100 p-3 mb-4 text-dark" type="text"  value="Delivery To Door" />
-                            <input className="w-100 p-3 mb-4 text-dark" type="email"  value="107 Rd No 8" />
+                            <input className="w-100 p-3 mb-4 text-dark" type="text"  value="Delivery To Door" disabled />
+                            <input className="w-100 p-3 mb-4 text-dark" type="email"  value="107 Rd No 8" disabled />
                             <input className="w-100 p-3 mb-4" placeholder="Flat Suite, Floor" type="text" />
                             <input className="w-100 p-3 mb-4" placeholder="Business Name" type="text" />
                             <input className="w-100 p-3 mb-4 btn btn-order" type="submit"  value="Save & Continue"  />

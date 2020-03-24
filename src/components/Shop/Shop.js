@@ -6,7 +6,7 @@ import { addToDatabaseCart, getDatabaseCart } from '../../utilities/databaseMana
 import { useAlert} from 'react-alert';
 
 const Shop = (props) => {
-    const {totalCartItems, setTotalCartItems} = props
+    const { setTotalCartItems } = props
     const [foodItems, setFoodItems] = useState(fakeData) 
     const [items, setItems] = useState([])   
     const [cartItems, setCartItems] = useState([])
