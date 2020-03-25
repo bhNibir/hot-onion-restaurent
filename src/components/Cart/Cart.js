@@ -26,9 +26,9 @@ const Cart = (props) => {
                 </Col>
                 <Col  className="d-flex align-items-center">
                     <div className="input-group number-spinner">
-                        <button className="mr-1"><FontAwesomeIcon icon={faMinus} /></button>
+                        <button className="mr-1 plus-btn"><FontAwesomeIcon icon={faMinus} /></button>
                         <input  type="text" className="form-control text-center" disabled value={quantity}/>
-                        <button className="ml-1"><FontAwesomeIcon icon={faPlus} /></button>
+                        <button className="ml-1 plus-btn"><FontAwesomeIcon icon={faPlus} /></button>
                     </div>
             
                 </Col>

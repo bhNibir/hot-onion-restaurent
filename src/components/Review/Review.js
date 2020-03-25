@@ -81,7 +81,7 @@ const Review = () => {
                                 <p><strong>Total</strong></p>
                                 <p class="ml-auto"><strong>$ 350</strong></p>
                             </div>
-                            <Link to="/oredercomplete" className="btn btn-secondary btn-sm btn-block">Place Order</Link>
+                            <Link to="/ordercomplete" style={{textDecoration: 'none', color: "white"}}><button className="btn btn-secondary btn-sm btn-block mb-4">Place Order</button></Link>
                         </div>
                     </Col>
                 </Row>

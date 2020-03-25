@@ -3,7 +3,7 @@
     border-radius: 12px;
     border: none;
 }
-.cart-container button{
+.cart-container .plus-btn{
     border: none;
     padding: 0;
     margin: 0;

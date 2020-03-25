@@ -18,6 +18,7 @@ import AlertTemplate from "react-alert-template-basic";
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import Review from './components/Review/Review';
+import OrderComplete from './components/OrderComplete/OrderComplete';
 
 
 const options = {
@@ -100,6 +101,9 @@ function App() {
             </Route>
             <Route path = '/review' >
               <Review></Review>
+            </Route>
+            <Route path = '/ordercomplete' >
+              <OrderComplete></OrderComplete>
             </Route>
         </Switch>
         </Provider>
