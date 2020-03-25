@@ -16,11 +16,19 @@ const Review = () => {
         items : [],
         totalQuantity: 0
     })
+    const[cartCal, setCartCal] = useState({
+        subTotal : 0,
+        tax : 20,
+        deliveryFee : 2,
+    })
     
     useEffect(() => { 
         const newCart = {
             ...cartItems
-        }      
+        }    
+        const NewCartCal = {
+            ...cartCal
+        }  
         const saveCart = getDatabaseCart()
         const saveCartValues = Object.values(saveCart)
         const saveCartKeys = Object.keys(saveCart)
@@ -29,12 +37,15 @@ const Review = () => {
         const newItem = () => saveCartKeys.map(key => {
             const item = items.find(item => item.key === key)
             item.quantity = saveCart[key]
+            item.totalPrice = item.price * item.quantity
+            NewCartCal.subTotal += item.totalPrice
             return item
         })
  
         newCart.items = newItem()
         newCart.totalQuantity = totalQuantity
         setCartItems(newCart)
+        setCartCal(NewCartCal)
         
         
     }, [])
@@ -75,20 +86,20 @@ const Review = () => {
                         </div>
                         <div className="order">
                             <div class="d-flex">
-                                <p>Subtotal . 4 Items</p>
-                                <p class="ml-auto">$ 300</p>
+                                <p>Subtotal . {cartItems.totalQuantity} Items</p>
+                                <p class="ml-auto">$ {cartCal.subTotal}</p>
                             </div>
                             <div class="d-flex">
                                 <p>Tax</p>
-                                <p class="ml-auto">$ 20</p>
+                                <p class="ml-auto">$ {cartCal.tax}</p>
                             </div>
                             <div class="d-flex">
                                 <p>Delivery fee</p>
-                                <p class="ml-auto">$ 2</p>
+                            <p class="ml-auto">$ {cartCal.deliveryFee}</p>
                             </div>
                             <div class="d-flex">
                                 <p><strong>Total</strong></p>
-                                <p class="ml-auto"><strong>$ 350</strong></p>
+                                <p class="ml-auto"><strong>$ {cartCal.subTotal + cartCal.tax + cartCal.deliveryFee}</strong></p>
                             </div>
                             <Link to="/ordercomplete" style={{textDecoration: 'none', color: "white"}}><button className="btn btn-secondary btn-sm btn-block mb-4" onClick={OrderCompleteMessage}>Place Order</button></Link>
                         </div>
