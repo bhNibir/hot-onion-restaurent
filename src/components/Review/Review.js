@@ -3,9 +3,10 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { getDatabaseCart } from '../../utilities/databaseManager';
 import fakeData from '../../fakeData';
+import Cart from '../Cart/Cart';
 
 const Review = () => {
-    const [items, setItems] = useState(fakeData)
+    const [items] = useState(fakeData)
     const [cartItems, setCartItems] = useState({
         items : [],
         totalQuantity: 0
@@ -25,16 +26,13 @@ const Review = () => {
             item.quantity = saveCart[key]
             return item
         })
-
-        
-        
+ 
         newCart.items = newItem()
         newCart.totalQuantity = totalQuantity
         setCartItems(newCart)
         
         
     }, [])
-    console.log(cartItems);
     
     
     return (
@@ -62,7 +60,9 @@ const Review = () => {
                             
                         </div>
                         <div>
-                    
+                            {
+                                cartItems.items.map(item => <Cart item={item}></Cart>)
+                            }
                         </div>
                         <div className="order">
                             <div class="d-flex">
