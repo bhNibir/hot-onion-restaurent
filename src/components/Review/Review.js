@@ -2,20 +2,39 @@ import React, { useEffect, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { getDatabaseCart } from '../../utilities/databaseManager';
+import fakeData from '../../fakeData';
 
 const Review = () => {
-    const [items, setItems] = useState()
-
-    useEffect(() => {
+    const [items, setItems] = useState(fakeData)
+    const [cartItems, setCartItems] = useState({
+        items : [],
+        totalQuantity: 0
+    })
+    
+    useEffect(() => { 
+        const newCart = {
+            ...cartItems
+        }      
         const saveCart = getDatabaseCart()
-        const items = saveCart
-        const itemObject = Object.values(saveCart)
-        const totalQuantity = itemObject.reduce((a, b) => a + b, 0)
-        setItems({items ,totalQuantity});
+        const saveCartValues = Object.values(saveCart)
+        const saveCartKeys = Object.keys(saveCart)
+        const totalQuantity = saveCartValues.reduce((a, b) => a + b, 0)
+
+        const newItem = () => saveCartKeys.map(key => {
+            const item = items.find(item => item.key === key)
+            item.quantity = saveCart[key]
+            return item
+        })
+
+        
+        
+        newCart.items = newItem()
+        newCart.totalQuantity = totalQuantity
+        setCartItems(newCart)
         
         
     }, [])
-    console.log(items);
+    console.log(cartItems);
     
     
     return (
