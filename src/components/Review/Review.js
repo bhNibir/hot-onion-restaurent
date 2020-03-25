@@ -5,11 +5,12 @@ import { getDatabaseCart, processOrder } from '../../utilities/databaseManager';
 import fakeData from '../../fakeData';
 import Cart from '../Cart/Cart';
 import { useAlert, positions } from 'react-alert';
-import { AuthContext } from '../../App'
+import { AuthContext, CartContext } from '../../App'
 
 const Review = () => {
     const alert = useAlert()
     const user = useContext(AuthContext)
+    const cart = useContext(CartContext)
 
     const [items] = useState(fakeData)
     const [cartItems, setCartItems] = useState({
@@ -59,6 +60,9 @@ const Review = () => {
         <div>           
             <Container>
                 <Row className="justify-content-center">
+                {
+                    cart.totalQuantity ?  
+                    <React.Fragment> 
                     <Col md={5} className="text-center">
                     <br/>
                     <h3>Edit Delivery Details</h3>
@@ -104,6 +108,13 @@ const Review = () => {
                             <Link to="/ordercomplete" style={{textDecoration: 'none', color: "white"}}><button className="btn btn-secondary btn-sm btn-block mb-4" onClick={OrderCompleteMessage}>Place Order</button></Link>
                         </div>
                     </Col>
+                    </React.Fragment>
+                    :
+                        <Col className=" text-center">                       
+                            <h3>Your Cart is Empty</h3>
+                            <Link to="/">Continue To Shop</Link>
+                        </Col>
+                    }
                 </Row>
             </Container>
         </div>
