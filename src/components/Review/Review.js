@@ -1,8 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { getDatabaseCart } from '../../utilities/databaseManager';
 
 const Review = () => {
+    const [items, setItems] = useState()
+
+    useEffect(() => {
+        const saveCart = getDatabaseCart()
+        const items = saveCart
+        const itemObject = Object.values(saveCart)
+        const totalQuantity = itemObject.reduce((a, b) => a + b, 0)
+        setItems({items ,totalQuantity});
+        
+        
+    }, [])
+    console.log(items);
+    
+    
     return (
         <div>           
             <Container>
@@ -27,7 +42,9 @@ const Review = () => {
                             <p><small>107 Rd No 8</small></p>
                             
                         </div>
-                        <div></div>
+                        <div>
+                    
+                        </div>
                         <div className="order">
                             <div class="d-flex">
                                 <p>Subtotal . 4 Items</p>
