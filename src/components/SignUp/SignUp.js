@@ -74,7 +74,8 @@ const SignUp = () => {
                         <input className="w-100 p-3 mb-4" onChange={handelUserInfo} placeholder="Confirm Password" type="password" name="confirmPassword"  required />
                         <input className="w-100 p-3 mb-4 btn btn-order" onClick={handelCreateUser}  type="submit"  value="Sign Up" disabled= {user.submitDisable} />
                     </div>
-                    <Link to="/login">Have an account?</Link>
+                    <p>Already have an account ? <Link to="/login"> Sign In</Link></p>
+                    
                     <br/>
                     <br/>
                     {/* </form> */}

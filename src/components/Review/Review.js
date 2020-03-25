@@ -1,11 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { getDatabaseCart } from '../../utilities/databaseManager';
+import { getDatabaseCart, processOrder } from '../../utilities/databaseManager';
 import fakeData from '../../fakeData';
 import Cart from '../Cart/Cart';
+import { useAlert, positions } from 'react-alert';
+import { AuthContext } from '../../App'
 
 const Review = () => {
+    const alert = useAlert()
+    const user = useContext(AuthContext)
+
     const [items] = useState(fakeData)
     const [cartItems, setCartItems] = useState({
         items : [],
@@ -34,6 +39,10 @@ const Review = () => {
         
     }, [])
     
+    const OrderCompleteMessage = () => {
+        alert.success(<div style={{ textTransform: "none" }}>Thank You {user.name}  </div> )
+        processOrder(cartItems)
+    }
     
     return (
         <div>           
@@ -81,7 +90,7 @@ const Review = () => {
                                 <p><strong>Total</strong></p>
                                 <p class="ml-auto"><strong>$ 350</strong></p>
                             </div>
-                            <Link to="/ordercomplete" style={{textDecoration: 'none', color: "white"}}><button className="btn btn-secondary btn-sm btn-block mb-4">Place Order</button></Link>
+                            <Link to="/ordercomplete" style={{textDecoration: 'none', color: "white"}}><button className="btn btn-secondary btn-sm btn-block mb-4" onClick={OrderCompleteMessage}>Place Order</button></Link>
                         </div>
                     </Col>
                 </Row>

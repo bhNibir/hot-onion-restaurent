@@ -100,10 +100,15 @@ function App() {
               }
             </Route>
             <Route path = '/review' >
-              <Review></Review>
+              {
+                 user.isSignIn ? <Review></Review> : <Redirect to = "/login" />
+              }
+              
             </Route>
             <Route path = '/ordercomplete' >
-              <OrderComplete></OrderComplete>
+              {
+                 user.isSignIn ? <OrderComplete></OrderComplete> : <Redirect to = "/login" />
+              }              
             </Route>
         </Switch>
         </Provider>
