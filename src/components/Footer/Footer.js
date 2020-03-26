@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowAltCircleRight, faBus, faBell, faShippingFast } from '@fortawesome/free-solid-svg-icons';
 import logo from '../../images/logo.png'
+import './Footer.css'
 
 
 const Footer = () => {
@@ -19,7 +20,7 @@ const Footer = () => {
                 </Row>
                 <Row>
                 <CardColumns>
-                    <Card>
+                    <Card className="cart-border">
                         <Card.Img variant="top" src="https://i.ibb.co/1MjJtHP/adult-blur-blurred-background-687824.png" />
                         <Card.Body>
                         <Card.Title><span className = "bg-danger text-white rounded-circle py-1 px-2"><FontAwesomeIcon className = "text-white" icon={faBus}></FontAwesomeIcon></span> Fast Delivery</Card.Title>
@@ -29,7 +30,7 @@ const Footer = () => {
                         <Link className="font-weight-bold">See More <FontAwesomeIcon className = "text-success" icon={faArrowAltCircleRight}></FontAwesomeIcon></Link>
                         </Card.Body>
                     </Card>
-                    <Card>
+                    <Card className="cart-border">
                         <Card.Img variant="top" src="https://i.ibb.co/3sFqDc1/chef-cook-food-33614.png" />
                         <Card.Body>
                         <Card.Title><span className = "bg-danger text-white rounded-circle py-1 px-2"><FontAwesomeIcon className = "text-white" icon={faBell}></FontAwesomeIcon></span> A Good Auto Responder</Card.Title>
@@ -41,7 +42,7 @@ const Footer = () => {
 
                         </Card.Body>
                     </Card>
-                    <Card>
+                    <Card className="cart-border">
                         <Card.Img variant="top" src="https://i.ibb.co/pj7ps21/architecture-building-city-2047397.png" />
                         <Card.Body>
                         <Card.Title><span className = "bg-danger text-white rounded-circle py-1 px-2"><FontAwesomeIcon className = "text-white" icon={faShippingFast}></FontAwesomeIcon></span> Home Delivery</Card.Title>
