@@ -19,6 +19,7 @@ import * as firebase from "firebase/app";
 import "firebase/auth";
 import Review from './components/Review/Review';
 import OrderComplete from './components/OrderComplete/OrderComplete';
+import Footer from './components/Footer/Footer';
 
 
 const options = {
@@ -88,6 +89,7 @@ function App() {
             <Route exact path="/">
               <Slider></Slider>
               <Shop setTotalCartItems={setTotalCartItems} totalCartItems={totalCartItems}></Shop>
+              <Footer></Footer>
             </Route>
             <Route path="/login">
               {
