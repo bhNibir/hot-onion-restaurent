@@ -2,7 +2,6 @@ import React, { useEffect, useState, useContext } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { getDatabaseCart, processOrder } from '../../utilities/databaseManager';
-import fakeData from '../../fakeData';
 import Cart from '../Cart/Cart';
 import { useAlert, positions } from 'react-alert';
 import { AuthContext, CartContext } from '../../App'
@@ -12,7 +11,7 @@ const Review = () => {
     const user = useContext(AuthContext)
     const cart = useContext(CartContext)
 
-    const [items] = useState(fakeData)
+    const [items, setItems] = useState([])
     const [cartItems, setCartItems] = useState({
         items : [],
         totalQuantity: 0
@@ -22,8 +21,29 @@ const Review = () => {
         tax : 20,
         deliveryFee : 2,
     })
-    
-    useEffect(() => { 
+
+    useEffect(() => {
+        const saveCart = Object.keys(getDatabaseCart())
+        console.log(saveCart)
+        fetch('http://localhost:4200/itemsReviewByKey', {
+                method: 'POST',
+                body: JSON.stringify(saveCart),
+                headers: {
+                  "Content-type": "application/json; charset=UTF-8"
+                }
+              })
+              .then(response => response.json())
+              .then(cartFood => setItems(cartFood))
+             
+    },[])
+
+    useEffect(()=>{
+        if(items.length){
+            handelCart(items)
+        }
+    },[items])
+
+    const handelCart= () => {
         const newCart = {
             ...cartItems
         }    
@@ -42,14 +62,14 @@ const Review = () => {
             NewCartCal.subTotal += item.totalPrice
             return item
         })
- 
+        
         newCart.items = newItem()
         newCart.totalQuantity = totalQuantity
+
         setCartItems(newCart)
-        setCartCal(NewCartCal)
-        
-        
-    }, [])
+        setCartCal(NewCartCal)   
+    }
+ 
     
     const OrderCompleteMessage = () => {
         alert.success(<div style={{ textTransform: "none" }}>Thank You {user.name}  </div> )
@@ -69,8 +89,8 @@ const Review = () => {
                             <hr/>
                             <br/>
                                 <div className="signup">
-                                    <input className="w-100 p-3 mb-4 text-dark" type="text"  value="Delivery To Door" />
-                                    <input className="w-100 p-3 mb-4 text-dark" type="email"  value="107 Rd No 8" />
+                                    <input className="w-100 p-3 mb-4 text-dark" type="text"  defaultValue="Delivery To Door" />
+                                    <input className="w-100 p-3 mb-4 text-dark" type="email"  defaultValue="107 Rd No 8" />
                                     <input className="w-100 p-3 mb-4" placeholder="Flat Suite, Floor" type="text" />
                                     <input className="w-100 p-3 mb-4" placeholder="Business Name" type="text" />
                                     <input className="w-100 p-3 mb-4 btn btn-order" type="submit"  value="Save & Continue"  />
@@ -85,25 +105,25 @@ const Review = () => {
                                 </div>
                                 <div>
                                     {
-                                        cartItems.items.map(item => <Cart item={item}></Cart>)
+                                        items.map(item => <Cart item={item} key={item.key}></Cart>)
                                     }
                                 </div>
                                 <div className="order">
-                                    <div class="d-flex">
+                                    <div className="d-flex">
                                         <p>Subtotal . {cartItems.totalQuantity} Items</p>
-                                        <p class="ml-auto">$ {cartCal.subTotal}</p>
+                                        <p className="ml-auto">$ {cartCal.subTotal}</p>
                                     </div>
-                                    <div class="d-flex">
+                                    <div className="d-flex">
                                         <p>Tax</p>
-                                        <p class="ml-auto">$ {cartCal.tax}</p>
+                                        <p className="ml-auto">$ {cartCal.tax}</p>
                                     </div>
-                                    <div class="d-flex">
+                                    <div className="d-flex">
                                         <p>Delivery fee</p>
-                                    <p class="ml-auto">$ {cartCal.deliveryFee}</p>
+                                    <p className="ml-auto">$ {cartCal.deliveryFee}</p>
                                     </div>
-                                    <div class="d-flex">
+                                    <div className="d-flex">
                                         <p><strong>Total</strong></p>
-                                        <p class="ml-auto"><strong>$ {cartCal.subTotal + cartCal.tax + cartCal.deliveryFee}</strong></p>
+                                        <p className="ml-auto"><strong>$ {cartCal.subTotal + cartCal.tax + cartCal.deliveryFee}</strong></p>
                                     </div>
                                     <Link to="/ordercomplete" style={{textDecoration: 'none', color: "white"}}><button className="btn btn-secondary btn-sm btn-block mb-4" onClick={OrderCompleteMessage}>Place Order</button></Link>
                                 </div>
