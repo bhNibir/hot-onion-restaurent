@@ -1,27 +1,30 @@
 import React, { useState, useEffect} from 'react';
 import './Shop.css'
-import fakeData from '../../fakeData'
 import FoodItems from '../FoodItems/FoodItems';
 import { addToDatabaseCart, getDatabaseCart } from '../../utilities/databaseManager';
 import { useAlert} from 'react-alert';
 
 const Shop = (props) => {
     const {totalCartItems, setTotalCartItems} = props
-    const [foodItems, setFoodItems] = useState(fakeData) 
+    const [foodItems, setFoodItems] = useState([]) 
     const [items, setItems] = useState([])   
     const [cartItems, setCartItems] = useState([])
     const alert = useAlert()
 
+    
+    useEffect(()=>{
+        fetch('http://localhost:4200/foodItems/')
+        .then(res => res.json())
+        .then(items => {
+            setFoodItems(items)
+            setItems(items.filter(item => item.category === 'lunch'))
+        })
+    },[])
+
     const onItemMenuClick = (value) => {
         setItems(foodItems.filter(item => item.category === value));        
     }
-    useEffect(()=>{
-        setFoodItems(fakeData)
-    },[items])
 
-    useEffect(() => {
-        onItemMenuClick("lunch")
-    },[])
 
     const handelCart= (item) =>{        
         const toBeAddedKey = item.key

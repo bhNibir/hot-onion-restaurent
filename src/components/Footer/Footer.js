@@ -27,7 +27,7 @@ const Footer = () => {
                         <Card.Text>
                             Keep your system om sync with automated web hook based notification each time link is paid and how we dream about our future
                         </Card.Text>
-                        <Link className="font-weight-bold">See More <FontAwesomeIcon className = "text-success" icon={faArrowAltCircleRight}></FontAwesomeIcon></Link>
+                        <Link className="font-weight-bold" to="">See More <FontAwesomeIcon className = "text-success" icon={faArrowAltCircleRight}></FontAwesomeIcon></Link>
                         </Card.Body>
                     </Card>
                     <Card className="cart-border">
@@ -38,7 +38,7 @@ const Footer = () => {
                             Keep your system om sync with automated web hook based notification each time link is paid and how we dream about our future
                         </Card.Text>
 
-                        <Link className="font-weight-bold">See More <FontAwesomeIcon className = "text-success" icon={faArrowAltCircleRight}></FontAwesomeIcon></Link>
+                        <Link className="font-weight-bold" to="">See More <FontAwesomeIcon className = "text-success" icon={faArrowAltCircleRight}></FontAwesomeIcon></Link>
 
                         </Card.Body>
                     </Card>
@@ -49,7 +49,7 @@ const Footer = () => {
                         <Card.Text>
                             Keep your system om sync with automated web hook based notification each time link is paid and how we dream about our future
                         </Card.Text>
-                        <Link className="font-weight-bold">See More <FontAwesomeIcon className = "text-success" icon={faArrowAltCircleRight}></FontAwesomeIcon></Link>
+                        <Link className="font-weight-bold" to="">See More <FontAwesomeIcon className = "text-success" icon={faArrowAltCircleRight}></FontAwesomeIcon></Link>
 
                         </Card.Body>
                     </Card>
