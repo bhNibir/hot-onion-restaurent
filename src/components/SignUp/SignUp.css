@@ -1,4 +1,4 @@
-.signup input{
+.signup input, textarea{
     border: none;
     background-color: ghostwhite;
     color: gray;

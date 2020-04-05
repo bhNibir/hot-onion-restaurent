@@ -5,11 +5,19 @@ import { getDatabaseCart, processOrder } from '../../utilities/databaseManager';
 import Cart from '../Cart/Cart';
 import { useAlert, positions } from 'react-alert';
 import { AuthContext, CartContext } from '../../App'
+import Payment from '../Payment/Payment';
+import { useForm } from "react-hook-form";
 
 const Review = () => {
+    const { register, handleSubmit} = useForm()
+    const [shipInfoAdded , setShipInfoAdded] = useState(null)
     const alert = useAlert()
     const user = useContext(AuthContext)
     const cart = useContext(CartContext)
+    const [paymentOption, setPaymentOption] = useState({
+        review : "",
+        payment : "none"
+    })
 
     const [items, setItems] = useState([])
     const [cartItems, setCartItems] = useState({
@@ -24,7 +32,6 @@ const Review = () => {
 
     useEffect(() => {
         const saveCart = Object.keys(getDatabaseCart())
-        console.log(saveCart)
         fetch('http://localhost:4200/itemsReviewByKey', {
                 method: 'POST',
                 body: JSON.stringify(saveCart),
@@ -39,11 +46,11 @@ const Review = () => {
 
     useEffect(()=>{
         if(items.length){
-            handelCart(items)
+            manageCart(items)
         }
     },[items])
 
-    const handelCart= () => {
+    const manageCart= () => {
         const newCart = {
             ...cartItems
         }    
@@ -76,10 +83,17 @@ const Review = () => {
         processOrder(cartItems)
     }
     
+    const handlePayment = () => {
+        setPaymentOption({review : 'none', payment : 'block' })
+    }
+
+    const onSubmit = data => {
+        setShipInfoAdded(data)
+    }; 
     return (
         <div>           
             <Container>
-                <Row className="justify-content-center">
+                <Row className="justify-content-center" style={{display: paymentOption.review}}>
                 {
                     cart.totalQuantity ?  
                         <React.Fragment> 
@@ -89,11 +103,20 @@ const Review = () => {
                             <hr/>
                             <br/>
                                 <div className="signup">
-                                    <input className="w-100 p-3 mb-4 text-dark" type="text"  defaultValue="Delivery To Door" />
-                                    <input className="w-100 p-3 mb-4 text-dark" type="email"  defaultValue="107 Rd No 8" />
-                                    <input className="w-100 p-3 mb-4" placeholder="Flat Suite, Floor" type="text" />
-                                    <input className="w-100 p-3 mb-4" placeholder="Business Name" type="text" />
-                                    <input className="w-100 p-3 mb-4 btn btn-order" type="submit"  value="Save & Continue"  />
+                                <form onSubmit={handleSubmit(onSubmit)}>
+                                    <input name="name" className="w-100 mb-1 p-2 text-dark" defaultValue="Delivery To Door" placeholder="Full Name" ref={register({required: true})} />
+                                    <br/>
+                                    <input name="email" className="w-100 mb-1 p-2 text-dark" defaultValue="107 Rd No 8" placeholder="Email" ref={register({required: true})} />
+                                    <br/>
+                                    <input name="address" className="w-100 mb-1 p-2"  placeholder="Address" ref={register({required: true})} />
+                                    <br/>
+                                    <input name="address2" className="w-100 mb-1 p-2"  placeholder="Address 2" ref={register} />
+                                    <br/>
+                                    <textarea name="instructor" className="w-100 mb-1 p-2"  placeholder="Add delivery instructor" ref={register} />
+                                    <br/>
+                                    <input className="w-100 p-3 mb-4 btn btn-order" type="submit" value="Save & Continue" />
+                                    
+                                </form>
                                 </div>
                             </Col>
                             <Col md={{ span: 3, offset: 3 }} className="justify-content-center mt-5">
@@ -125,7 +148,12 @@ const Review = () => {
                                         <p><strong>Total</strong></p>
                                         <p className="ml-auto"><strong>$ {cartCal.subTotal + cartCal.tax + cartCal.deliveryFee}</strong></p>
                                     </div>
-                                    <Link to="/ordercomplete" style={{textDecoration: 'none', color: "white"}}><button className="btn btn-secondary btn-sm btn-block mb-4" onClick={OrderCompleteMessage}>Place Order</button></Link>
+                                    {/* <Link to="/ordercomplete" style={{textDecoration: 'none', color: "white"}}><button className="btn btn-secondary btn-sm btn-block mb-4" onClick={OrderCompleteMessage}>Place Order</button></Link> */}
+                                   
+                                    <button className="btn btn-secondary btn-sm btn-block mb-4" onClick={handlePayment}>
+                                        Proceed to Pay
+                                    </button>
+            
                                 </div>
                             </Col>
                         </React.Fragment>
@@ -135,6 +163,9 @@ const Review = () => {
                             <Link to="/">Continue To Shop</Link>
                         </Col>
                     }
+                </Row>
+                <Row style={{display: paymentOption.payment}}>
+                    <Payment></Payment>
                 </Row>
             </Container>
         </div>
