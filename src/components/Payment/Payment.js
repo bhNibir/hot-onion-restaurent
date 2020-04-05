@@ -5,12 +5,12 @@ import { loadStripe } from '@stripe/stripe-js';
 
 const stripePromise = loadStripe('pk_test_6pRNASCoBOKtIshFeQd4XMUh');
 
-const Payment = ({OrderComplete}) => {
+const Payment = ({orderPocess}) => {
    
   return (
     <div>
       <Elements stripe={stripePromise}>
-        <CheckoutForm OrderComplete={OrderComplete}/>
+        <CheckoutForm orderPocess={orderPocess}/>
       </Elements>
       
     </div>

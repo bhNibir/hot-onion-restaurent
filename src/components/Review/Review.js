@@ -79,8 +79,7 @@ const Review = () => {
     }
  
     
-    const OrderComplete = (paymentDetails) => {
-        console.log(paymentDetails.id, paymentDetails.card.last4)
+    const orderPocess = (paymentDetails) => {
         const orderDetails = {
             user: user.name,
             cart: getDatabaseCart(),
@@ -100,7 +99,7 @@ const Review = () => {
           })
           .then(response => response.json())
           .then(json => console.log(json))
-        alert.success(<div style={{ textTransform: "none" }}>Thank You {user.name}  </div> )
+        alert.success(<div style={{ textTransform: "none" }}>Thank You {user.name} <br/> Your Order id: {paymentDetails.id} </div>, {timeout: 5000,} )
         processOrder(cartItems)
     }
     
@@ -142,7 +141,7 @@ const Review = () => {
                     }
                 </Row>
                 <Row style={{display: controlEnable.payment}}>
-                    <Payment OrderComplete={OrderComplete}></Payment>
+                    <Payment orderPocess={orderPocess}></Payment>
                 </Row>
             </Container>
         </div>
