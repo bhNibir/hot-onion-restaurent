@@ -13,9 +13,11 @@ const Review = () => {
     const alert = useAlert()
     const user = useContext(AuthContext)
     const cart = useContext(CartContext)
-    const [paymentOption, setPaymentOption] = useState({
+
+    const [controlEnable, setControlEnable] = useState({
         review : "",
-        payment : "none"
+        payment : "none",
+        detailsForm : false,
     })
 
     const [items, setItems] = useState([])
@@ -77,29 +79,47 @@ const Review = () => {
     }
  
     
-    const OrderCompleteMessage = () => {
+    const OrderComplete = () => {
+        const orderDetails = {
+            user: user.name,
+            cart: getDatabaseCart(),
+            shipment:shipInfoAdded,
+            paymentDetails: {}
+        }
+
+        fetch('http://localhost:4200/orders', {
+            method: 'POST',
+            body: JSON.stringify(orderDetails),
+            headers: {
+              "Content-type": "application/json; charset=UTF-8"
+            }
+          })
+          .then(response => response.json())
+          .then(json => console.log(json))
+
         alert.success(<div style={{ textTransform: "none" }}>Thank You {user.name}  </div> )
         processOrder(cartItems)
     }
     
     const handlePayment = () => {
-        setPaymentOption({review : 'none', payment : 'block' })
+        setControlEnable({review : 'none', payment : 'block' })
     }
 
     const onSubmitShipDetails = data => {
+        controlEnable.detailsForm = true
         setShipInfoAdded(data)
     }
-    console.log(shipInfoAdded) 
     return (
         <div>           
             <Container>
-                <Row className="justify-content-center" style={{display: paymentOption.review}}>
+                <Row className="justify-content-center" style={{display: controlEnable.review}}>
                 {
                     cart.totalQuantity ?  
                         <React.Fragment> 
                             <Col md={5} className="text-center">
                                 <ShipmentDetails 
                                     onSubmitShipDetails={onSubmitShipDetails}
+                                    controlEnable={controlEnable}
                                     >
                                 </ShipmentDetails>
                             </Col>
@@ -118,8 +138,8 @@ const Review = () => {
                         </Col>
                     }
                 </Row>
-                <Row style={{display: paymentOption.payment}}>
-                    <Payment></Payment>
+                <Row style={{display: controlEnable.payment}}>
+                    <Payment OrderComplete={OrderComplete}></Payment>
                 </Row>
             </Container>
         </div>
