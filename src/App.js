@@ -20,7 +20,6 @@ import "firebase/auth";
 import Review from './components/Review/Review';
 import OrderComplete from './components/OrderComplete/OrderComplete';
 import Footer from './components/Footer/Footer';
-import Payment from './components/Payment/Payment';
 
 
 const options = {
@@ -111,11 +110,6 @@ function App() {
             <Route path = '/ordercomplete' >
               {
                  user.isSignIn ? <OrderComplete></OrderComplete> : <Redirect to = "/login" />
-              }              
-            </Route>
-            <Route path = '/payment' >
-              {
-                 user.isSignIn ? <Payment></Payment> : <Redirect to = "/login" />
               }              
             </Route>
         </Switch>

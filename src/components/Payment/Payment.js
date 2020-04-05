@@ -1,14 +1,19 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Elements } from '@stripe/react-stripe-js';
+import CheckoutForm from '../CheckoutForm/CheckoutForm';
+import { loadStripe } from '@stripe/stripe-js';
 
-const Payment = ({OrderComplete}) => {
-    return (
-        <div>
-            <h1>Payment</h1>
-            <Link to="/ordercomplete" style={{textDecoration: 'none', color: "white"}}><button className="btn btn-secondary btn-sm btn-block mb-4" onClick={OrderComplete}>Place Order</button></Link>
-       
-        </div>
-    );
+const stripePromise = loadStripe('pk_test_6pRNASCoBOKtIshFeQd4XMUh');
+
+const Payment = () => {
+  return (
+    <div>
+      <Elements stripe={stripePromise}>
+        <CheckoutForm />
+      </Elements>
+      
+    </div>
+  );
 };
 
 export default Payment;
