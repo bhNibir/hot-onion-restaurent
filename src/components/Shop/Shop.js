@@ -13,7 +13,7 @@ const Shop = (props) => {
 
     
     useEffect(()=>{
-        fetch('http://localhost:4200/foodItems/')
+        fetch('https://mighty-headland-40172.herokuapp.com/foodItems/')
         .then(res => res.json())
         .then(items => {
             setFoodItems(items)

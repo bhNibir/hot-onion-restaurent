@@ -33,7 +33,7 @@ const Review = () => {
 
     useEffect(() => {
         const saveCart = Object.keys(getDatabaseCart())
-        fetch('http://localhost:4200/itemsReviewByKey', {
+        fetch('https://mighty-headland-40172.herokuapp.com/itemsReviewByKey', {
                 method: 'POST',
                 body: JSON.stringify(saveCart),
                 headers: {
@@ -79,15 +79,19 @@ const Review = () => {
     }
  
     
-    const OrderComplete = () => {
+    const OrderComplete = (paymentDetails) => {
+        console.log(paymentDetails.id, paymentDetails.card.last4)
         const orderDetails = {
             user: user.name,
             cart: getDatabaseCart(),
             shipment:shipInfoAdded,
-            paymentDetails: {}
+            paymentDetails: {
+                id:paymentDetails.id, 
+                last4: paymentDetails.card.last4
+            }
         }
 
-        fetch('http://localhost:4200/orders', {
+        fetch('https://mighty-headland-40172.herokuapp.com/orders', {
             method: 'POST',
             body: JSON.stringify(orderDetails),
             headers: {
@@ -96,7 +100,6 @@ const Review = () => {
           })
           .then(response => response.json())
           .then(json => console.log(json))
-
         alert.success(<div style={{ textTransform: "none" }}>Thank You {user.name}  </div> )
         processOrder(cartItems)
     }
