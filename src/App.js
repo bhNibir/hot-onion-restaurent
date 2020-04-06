@@ -60,7 +60,7 @@ function App() {
         // No user is signed in.
       }
     })
-  },[user])
+  },[])
 
   const logOut = () => {
     firebase.auth().signOut()
