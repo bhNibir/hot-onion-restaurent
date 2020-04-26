@@ -10,6 +10,7 @@ const Shop = (props) => {
     const [items, setItems] = useState([])   
     const [cartItems, setCartItems] = useState([])
     const alert = useAlert()
+    const [activeClass, setActiveClass] = useState("lunch")
 
     
     useEffect(()=>{
@@ -22,7 +23,8 @@ const Shop = (props) => {
     },[])
 
     const onItemMenuClick = (value) => {
-        setItems(foodItems.filter(item => item.category === value));        
+        setItems(foodItems.filter(item => item.category === value));  
+        setActiveClass(value)      
     }
 
 
@@ -50,16 +52,15 @@ const Shop = (props) => {
         const itemObject = Object.values(saveCart)
         const totalQuantity = itemObject.reduce((a, b) => a + b, 0)
         setTotalCartItems({items, totalQuantity});
-        
-        
+                
     }, [cartItems])
 
     return (
         <div>
             <div className="item-menu text-center mt-5">
-                <button  className="item-btn " onClick={() => onItemMenuClick("breakfast")}>Breakfast</button>
-                <button  className="item-btn active" onClick={() => onItemMenuClick("lunch")}>Lunch</button>
-                <button  className="item-btn" onClick={() => onItemMenuClick("dinner")}>Dinner</button>
+                <button  className={activeClass === "breakfast" ? "item-btn active" : " item-btn"} onClick={() => onItemMenuClick("breakfast")}>Breakfast</button>
+                <button  className={activeClass === "lunch" ? "item-btn active" : " item-btn"} onClick={() => onItemMenuClick("lunch")}>Lunch</button>
+                <button  className={activeClass === "dinner" ? "item-btn active" : " item-btn"} onClick={() => onItemMenuClick("dinner")}>Dinner</button>
             </div>
             
             <FoodItems items={items} handelCart={handelCart}></FoodItems>

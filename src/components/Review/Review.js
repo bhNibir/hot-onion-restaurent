@@ -80,6 +80,7 @@ const Review = () => {
  
     
     const orderPocess = (paymentDetails) => {
+        console.log(paymentDetails)
         const orderDetails = {
             user: user.name,
             cart: getDatabaseCart(),
@@ -90,7 +91,9 @@ const Review = () => {
             }
         }
 
-        fetch('https://mighty-headland-40172.herokuapp.com/orders', {
+        const url = "https://mighty-headland-40172.herokuapp.com/orders"
+        // const url = "http://localhost:4200/orders"
+        fetch(url, {
             method: 'POST',
             body: JSON.stringify(orderDetails),
             headers: {
