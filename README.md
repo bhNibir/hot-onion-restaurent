@@ -1,6 +1,6 @@
 # Red Onion Foods
 
-## [Live](https://hot-onion-bhnibir-6282f.firebaseapp.com/) || [Back-End](https://mighty-headland-40172.herokuapp.com/)
+## [Live](https://hot-onion-bhnibir-6282f.firebaseapp.com/) || [Back-End API Live](https://mighty-headland-40172.herokuapp.com/) || [Back-End Github ](https://github.com/bhNibir/hot-onion-api)
 
 A full-stack restaurant web app where anyone can order their favorite food from the
 menu and have options for breakfast, lunch, and dinner. Online paying system using their credit
